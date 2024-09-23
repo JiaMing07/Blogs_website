@@ -1,0 +1,36 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="row">
+    {% if paginator %}
+        {% for obj in paginator.show_lst %}
+            <div class="col-md-8 col-md-offset-2">
+{#                <div class="card">#}
+                <ul class="collection ">
+                    <li class="collection-item avatar">
+                    <h3><a href={% url 'blog:blog_detail' pk=obj.pk %}>{{ obj.title }}</a></h3>
+                    <p class="blue-grey-text text-lighten-3">{{ obj.show_text }}</p>
+                    <p class="blue-grey-text text-lighten-3">作者：{{ obj.author_name }} {{ obj.pub_date }} 阅读 {{ obj.read }} 点赞 {{ obj.like }} 收藏 {{ obj.collect }} 评论 {{ obj.comment_set.count }}</p>
+{#                </div>#}
+                    </li>
+                </ul>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        {% for obj in blog_list %}
+            <div class="col-md-8 col-md-offset-2">
+{#                <div class="card">#}
+                <ul class="collection ">
+                    <li class="collection-item avatar">
+                    <h3><a href={% url 'blog:blog_detail' pk=obj.pk %}>{{ obj.title }}</a></h3>
+                    <p class="blue-grey-text text-lighten-3">{{ obj.show_text }}</p>
+                    <p class="blue-grey-text text-lighten-3">作者：{{ obj.author_name }} {{ obj.pub_date }} 阅读 {{ obj.read }} 点赞 {{ obj.like }} 收藏 {{ obj.collect }} 评论 {{ obj.comment_set.count }}</p>
+{#                </div>#}
+                    </li>
+                </ul>
+
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+{% endblock %}

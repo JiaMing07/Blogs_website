@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <ul class="list-group">
+            <li class="list-group-item"><h4><a href="{% url 'blog:show_category' tag='Python' %}">Python&nbsp;&nbsp;共1055个博客</a></h4></li>
+            <li class="list-group-item"><h4><a href="{% url 'blog:show_category' tag='C++' %}">C++&nbsp;&nbsp;共521个博客</a></h4></li>
+            <li class="list-group-item"><h4><a href="{% url 'blog:show_category' tag='C2' %}">C#&nbsp;&nbsp;共354个博客</a></h4></li>
+            <li class="list-group-item"><h4><a href="{% url 'blog:show_category' tag='Java' %}">Java&nbsp;&nbsp;共1834个博客</a></h4></li>
+            <li class="list-group-item"><h4><a href="{% url 'blog:show_category' tag='JavaScript' %}">JavaScript&nbsp;&nbsp;共843个博客</a></h4></li>
+            <li class="list-group-item"><h4><a href="{% url 'blog:show_category' tag='PHP' %}">PHP&nbsp;&nbsp;共1053个博客</a></h4></li>
+            <li class="list-group-item"><h4><a href="{% url 'blog:show_category' tag='SQL' %}">SQL&nbsp;&nbsp;共1522个博客</a></h4></li>
+            <li class="list-group-item"><h4><a href="{% url 'blog:show_category' tag='else' %}">其他&nbsp;&nbsp;共639个博客</a></h4></li>
+      </ul>
+    </div>
+</div>
+
+{% endblock %}

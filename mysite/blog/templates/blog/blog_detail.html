@@ -1,0 +1,78 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <style>
+        h1, h2, h3, h4{
+            font-family: 'STKaiTi';
+        }
+        .card_text{
+            font-family: 'STFangsong';
+        }
+    </style>
+    <h1 class="white-text" align="center">{{ blog.title }}</h1>
+        <div class="row">
+        <div class="col-md-2">
+            <div class="col">
+                <div class="card-panel">
+                <img class="card-img-top" src={{ blog.author_pic }} />
+                <div class="card-body">
+                    <h3 class="card-title flow-text text-center">{{ blog.author_name }}</h3>
+                    <p class="card-text flow-text card_text">粉丝：&nbsp;{{ blog.author_fans }}</p>
+                    <p class="card-text flow-text card_text">声望：&nbsp;{{ blog.author_popularity }}</p>
+                    <p class="card-text flow-text card_text">标签：&nbsp;{{ blog.tags.all|join:", " }}</p>
+                    <p class="card-text flow-text card_text">赞&nbsp;{{ blog.like }}</p>
+                    <p class="card-text flow-text card_text">收藏&nbsp;{{ blog.collect }}</p>
+                    <p class="card-text flow-text card_text">阅读&nbsp;{{ blog.read }}</p>
+                    <p class="card-text flow-text .fs-6 card_text">{{ blog.pub_date }}</p>
+                </div>
+            </div>
+        </div>
+        </div>
+            <div class="detail">
+                <style>
+                    a{
+                        color:#ccff90;
+                    }
+                </style>
+        <div class="col-md-10">
+            {{ blog.article | safe }}
+        </div>
+        </div>
+        </div>
+
+<a href={{ blog.url }}><style>
+    .link_blog{
+        font-family: "Microsoft YaHei UI";
+        color: lightblue;
+    }
+</style><h3 class="link_blog">原文链接</h3></a>
+<form method="POST" action="{% url 'blog:submit_comment' pk=blog.pk %}">
+    {% csrf_token %}
+    <fieldset class="form-group">
+{#        <legend><h5>评论</h5></legend>#}
+        <label for="input_comment">评论</label>
+{#        <input type="text" name="comment_text" id="input_comment">#}
+        <textarea class="form-control" rows="3" name="comment_text" id="input_comment" required></textarea>
+    </fieldset>
+    <button type="submit" class="save btn btn-default">提交</button>
+</form>
+    {% if empty %}
+        <h3><p align="center">{{ empty }}</p></h3>
+    {% endif %}
+    {% for comment in comments %}
+        <div class="row">
+        <div class="col-md-8 card-panel">
+            <span class="fs-5 ">{{ comment.comment_text }}</span>
+            <p class="fs-6">{{ comment.public_date }}</p>
+        </div>
+        <div class="col-md-4">
+            <form method="post" action="{% url 'blog:delete_comment' pk=blog.pk comment_id=comment.pk %}">
+           {% csrf_token %}
+            <div class="form-group">
+            <label for="comments"></label>
+            <input type="submit" value="删除" name="delete">
+            </div>
+            </form>
+        </div>
+        </div>
+    {% endfor %}
+{% endblock %}
